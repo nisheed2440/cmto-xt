@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-// import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import NavTabs from "../components/NavTabs";
 import HeroBanner from "../components/HeroBanner";
 import BannerImage from "../assets/images/bg7.jpg";
+import Agenda from "./Agenda";
+import Schedule from "./Schedule";
+import Favourites from "./Favourites";
+import MyPass from "./MyPass";
 
 const styles = theme => ({
   root: {
@@ -25,9 +28,16 @@ const styles = theme => ({
   }
 });
 
+const routeMapping = {
+  schedule: <Schedule />,
+  favourites: <Favourites />,
+  agenda: <Agenda />,
+  mypass: <MyPass />
+};
+
 class Homepage extends Component {
   render() {
-    const {classes} = this.props;
+    const { classes } = this.props;
     return (
       <React.Fragment>
         <HeroBanner imageSrc={BannerImage} />
@@ -38,14 +48,22 @@ class Homepage extends Component {
                 <NavTabs />
               </Paper>
               <div className={classes.routeBody}>
-                        <Typography>
-                            Enim anim anim eu proident id. Proident labore sit incididunt
-                            aute reprehenderit labore proident ex enim. Incididunt culpa
-                            ea non quis occaecat quis labore laboris. Minim sint et
-                            reprehenderit cupidatat magna sint proident consequat nostrud
-                            eu dolore sint non.
-                        </Typography>
-                        </div> 
+                <Switch>
+                  <Route
+                    path="/home/:tab"
+                    exact
+                    render={({ match }) => {
+                      const tab = match.params.tab;
+                      if (routeMapping[tab]) {
+                        return routeMapping[tab];
+                      } else {
+                        return <Redirect to="/home/agenda" />;
+                      }
+                    }}
+                  />
+                  <Redirect from="/home" to="/home/agenda" />
+                </Switch>
+              </div>
             </Grid>
           </Grid>
         </main>
@@ -55,7 +73,8 @@ class Homepage extends Component {
 }
 
 Homepage.propTypes = {
-    classes: PropTypes.object.isRequired
-}
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+};
 
 export default withStyles(styles)(Homepage);
