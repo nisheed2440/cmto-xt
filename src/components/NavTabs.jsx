@@ -1,30 +1,32 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import MUITabs from "@material-ui/core/Tabs";
+import MUITab from "@material-ui/core/Tab";
 import withWidth from '@material-ui/core/withWidth';
+import {withRouter} from 'react-router-dom';
 
 const styles = {
   root: {
     flexGrow: 1,
-    borderBottom: '1px solid #C7C7C7'
   }
 };
 
-class WTabs extends Component {
+class NavTabs extends Component {
   state = {
     value: 'agenda'
   };
 
   handleChange = (event, value) => {
+    const {history} = this.props;
     this.setState({ value });
+    history.push(`/home/${value}`);
   };
   render() {
-    const { classes, width } = this.props;
+    const { classes, width, history } = this.props;
     return (
       <div className={classes.root}>
-        <Tabs
+        <MUITabs
           value={this.state.value}
           onChange={this.handleChange}
           indicatorColor="secondary"
@@ -32,19 +34,20 @@ class WTabs extends Component {
           centered={width !== 'xs'}
           scrollable={width === 'xs'}
         >
-          <Tab label="Agenda" value="agenda"/>
-          <Tab label="Schedule" value="schedule"/>
-          <Tab label="Favorites" value="favourites"/>
-          <Tab label="My Pass" value="pass"/>
-        </Tabs>
+          <MUITab label="Agenda" value="agenda"/>
+          <MUITab label="Schedule" value="schedule"/>
+          <MUITab label="Favorites" value="favourites"/>
+          <MUITab label="My Pass" value="pass"/>
+        </MUITabs>
       </div>
     );
   }
 }
 
-WTabs.propTypes = {
+NavTabs.propTypes = {
   classes: PropTypes.object.isRequired,
   width: PropTypes.string.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(withWidth()(WTabs));
+export default withStyles(styles)(withWidth()(withRouter(NavTabs)));
