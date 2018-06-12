@@ -8,16 +8,18 @@ const styles = {
         zIndex:-1
     },
     headline: {
-        color: '#FFFFFF'
+        color: '#000000'
     }
 };
 
 class HeroBanner extends Component {
     render() {
         const {imageSrc, headline, children, classes} = this.props;
+        const headlineComponent = headline ? <h1 className={classes.headline}>{headline}</h1> : '';
+    
         return (
-            <LazyHero imageSrc={imageSrc} opacity={0} parallaxOffset={40} className={classes.heroBanner}>
-                <h1 className={classes.headline}>{headline}</h1>
+            <LazyHero imageSrc={imageSrc} opacity={0.3} parallaxOffset={40} className={classes.heroBanner}>
+                {headlineComponent}
                 {children}
             </LazyHero>
         );

@@ -7,7 +7,7 @@ import {
   Redirect,
   Switch
 } from "react-router-dom";
-import Homepage from "./views/Homepage";
+import LoadableHomepage from "./loadable/LoadableHomepage";
 import theme from "./utils/theme";
 import store from "./store";
 import { Provider } from "react-redux";
@@ -22,7 +22,7 @@ class App extends Component {
             <CssBaseline />
             <MuiThemeProvider theme={theme}>
               <Switch>
-                <Route path="/home" component={Homepage} />
+                <Route path="/home" component={LoadableHomepage} />
                 <Redirect from="/" to="/home" />
               </Switch>
             </MuiThemeProvider>

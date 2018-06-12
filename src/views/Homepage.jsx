@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import LazyLoad from 'react-lazyload';
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -6,11 +7,12 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import NavTabs from "../components/NavTabs";
 import HeroBanner from "../components/HeroBanner";
-import BannerImage from "../assets/images/bg7.jpg";
+import BannerImage from "../assets/images/bg8.jpg";
+import WninLogo from "../assets/images/wnin_logo.png";
 import Agenda from "./Agenda";
 import Schedule from "./Schedule";
 import Favourites from "./Favourites";
-import MyPass from "./MyPass";
+import LoadableMyPass from "../loadable/LoadableMyPass";
 
 const styles = theme => ({
   root: {
@@ -23,7 +25,7 @@ const styles = theme => ({
   },
   routeBody: {
     flexGrow: 1,
-    padding: theme.spacing.unit,
+    paddingTop: theme.spacing.unit * 2,
     minHeight: "1000px"
   }
 });
@@ -32,7 +34,7 @@ const routeMapping = {
   schedule: <Schedule />,
   favourites: <Favourites />,
   agenda: <Agenda />,
-  mypass: <MyPass />
+  mypass: <LoadableMyPass />
 };
 
 class Homepage extends Component {
@@ -40,11 +42,15 @@ class Homepage extends Component {
     const { classes } = this.props;
     return (
       <React.Fragment>
-        <HeroBanner imageSrc={BannerImage} />
+        <HeroBanner imageSrc={BannerImage}>
+            <LazyLoad height={200}>
+                <img src={WninLogo} alt="Logo"/>
+            </LazyLoad>
+        </HeroBanner>
         <main className={classes.root}>
           <Grid container spacing={16}>
             <Grid item xs={12}>
-              <Paper square elevation={1}>
+              <Paper elevation={4}>
                 <NavTabs />
               </Paper>
               <div className={classes.routeBody}>
