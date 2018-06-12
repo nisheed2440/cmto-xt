@@ -28,7 +28,7 @@ class MyPass extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Grid container className={classes.root} spacing={16} justify="center">
+      <Grid container spacing={16} justify="center">
         <Grid item>
           <Card className={classes.card}>
             <CardHeader
