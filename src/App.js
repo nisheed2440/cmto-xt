@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch
+} from "react-router-dom";
 import Homepage from "./views/Homepage";
 import theme from "./utils/theme";
 import store from "./store";
@@ -16,8 +21,10 @@ class App extends Component {
           <React.Fragment>
             <CssBaseline />
             <MuiThemeProvider theme={theme}>
-              <Redirect from="/" to="/home" />
-              <Route path="/home" component={Homepage} />
+              <Switch>
+                <Route path="/home" component={Homepage} />
+                <Redirect from="/" to="/home" />
+              </Switch>
             </MuiThemeProvider>
           </React.Fragment>
         </Router>
