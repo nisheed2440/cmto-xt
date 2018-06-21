@@ -10,7 +10,7 @@ import HeroBanner from "../components/HeroBanner";
 import BannerImage from "../assets/images/bg8.jpg";
 import WninLogo from "../assets/images/wnin_logo.png";
 import Agenda from "./Agenda";
-import Schedule from "./Schedule";
+import FetchSchedule from "../components/FetchSchedule";
 import Favourites from "./Favourites";
 import LoadableMyPass from "../loadable/LoadableMyPass";
 
@@ -31,7 +31,7 @@ const styles = theme => ({
 });
 
 const routeMapping = {
-  schedule: <Schedule />,
+  schedule: <FetchSchedule />,
   favourites: <Favourites />,
   agenda: <Agenda />,
   mypass: <LoadableMyPass />
