@@ -11,10 +11,11 @@ import Icon from "@material-ui/core/Icon";
 import Grid from "@material-ui/core/Grid";
 import defaultProfileIcon from '../images/default_avatar.png';
 import ShowMoreModal from './ShowMoreModal';
+import Filter from './Filter';
 
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import { mailFolderListItems} from './tileData';
+
 
 const styles = theme => ({
   ampm: {
@@ -75,7 +76,9 @@ class Schedule extends Component {
   sideList = () => {
     const { classes } = this.props;
     return <div className={classes.list}>
-      <List>{mailFolderListItems}</List>
+      <List>
+        <Filter {...this.props}/>
+      </List>
     </div>
   }
 
@@ -129,7 +132,8 @@ class Schedule extends Component {
   };
 
   render() {
-    const { scheduleData, sessionDetails } = this.props;
+    const { scheduleData, sessionDetails, filterTags } = this.props;
+    console.log(filterTags);
     console.log(sessionDetails);
     return (
       <Fragment>
@@ -149,6 +153,7 @@ class Schedule extends Component {
             onClick={this.toggleDrawer(false)}
             onKeyDown={this.toggleDrawer(false)}
           >
+          <button onClick={this.toggleDrawer(false)}>Close</button>
             {this.sideList()}
           </div>
         </Drawer>

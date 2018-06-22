@@ -1,8 +1,12 @@
-"filter":
   {
-	"title": "My filters",
-	"tagInfo": [
-		"AR",
-		"React"
-	]
+		"title": "My filters",
+		"tagInfo": [
+			"Data Mining",
+			"Artificial Intelligence",
+			"Front end optimization",
+			"Internet of things",
+			"React",
+			"Node Applications",
+			"Deep learning"
+		]
   }
