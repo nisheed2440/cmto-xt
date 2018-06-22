@@ -1,18 +1,20 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
+// import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
 import Typography from "@material-ui/core/Typography";
 import Icon from "@material-ui/core/Icon";
-import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
+
 import Grid from "@material-ui/core/Grid";
 import defaultProfileIcon from '../images/default_avatar.png';
 import ShowMoreModal from './ShowMoreModal';
 
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import { mailFolderListItems} from './tileData';
 
 const styles = theme => ({
   ampm: {
@@ -43,6 +45,12 @@ const styles = theme => ({
   },
   disabled:{
       opacity: '1 !important'
+  },
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
   }
 });
 
@@ -53,7 +61,8 @@ const imgStyle= {'width': '50px',
 class Schedule extends Component {
   state = {
     expanded: null,
-    showModal: false
+    showModal: false,
+    filter : false
   };
 
   handleChange = panel => (event, expanded) => {
@@ -62,6 +71,13 @@ class Schedule extends Component {
       expanded: expanded ? panel : false
     });
   };
+
+  sideList = () => {
+    const { classes } = this.props;
+    return <div className={classes.list}>
+      <List>{mailFolderListItems}</List>
+    </div>
+  }
 
   getScheduleTable(scheduleData) {
     const { expanded } = this.state;
@@ -104,18 +120,39 @@ class Schedule extends Component {
 
   handleClose = () => {
     this.setState({ showModal: false });
+  }
+  
+  toggleDrawer = (open) => () => {
+    this.setState({
+      filter : open,
+    });
   };
 
   render() {
     const { scheduleData, sessionDetails } = this.props;
     console.log(sessionDetails);
     return (
-      <Grid container spacing={16} justify="center">
-        <Grid item xs={12}>
-          {scheduleData && this.getScheduleTable(scheduleData)}
-        </Grid>
+      <Fragment>
+        <div className="schedule-bar">Today's Schedule
+          <button onClick={this.toggleDrawer(true)}>Filter</button>
+        </div>
+        <Grid container spacing={16} justify="center">
+          <Grid item xs={12}>
+            {scheduleData && this.getScheduleTable(scheduleData)}
+          </Grid>
         <ShowMoreModal open={this.state.showModal} handleClose={this.handleClose}/>
       </Grid>
+        <Drawer anchor="right" open={this.state.filter} onClose={this.toggleDrawer(false)}>
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={this.toggleDrawer(false)}
+            onKeyDown={this.toggleDrawer(false)}
+          >
+            {this.sideList()}
+          </div>
+        </Drawer>
+      </Fragment>
     );
   }
 }
