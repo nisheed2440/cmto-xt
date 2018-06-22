@@ -10,6 +10,9 @@ import Icon from "@material-ui/core/Icon";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
+import defaultProfileIcon from '../images/default_avatar.png';
+import ShowMoreModal from './ShowMoreModal';
+
 
 const styles = theme => ({
   ampm: {
@@ -43,12 +46,18 @@ const styles = theme => ({
   }
 });
 
+const imgStyle= {'width': '50px',
+    'border': '1px',
+   ' border-radius': '25px'}
+
 class Schedule extends Component {
   state = {
-    expanded: null
+    expanded: null,
+    showModal: false
   };
 
   handleChange = panel => (event, expanded) => {
+    this.props.getSessionDetails();
     this.setState({
       expanded: expanded ? panel : false
     });
@@ -56,7 +65,7 @@ class Schedule extends Component {
 
   getScheduleTable(scheduleData) {
     const { expanded } = this.state;
-    const { classes } = this.props;
+    const { classes, sessionDetails } = this.props;
     return scheduleData.map((item, index) => {
         let timeIndex = item.time.indexOf('AM' || 'PM');
         return (
@@ -67,29 +76,45 @@ class Schedule extends Component {
                         {item.time.substring(0, timeIndex)} <span className={classes.ampm}>{item.time.slice(-2)}</span>
                     </Typography>
                     <Typography className={classes.title}>
-                        {item.title} 
+                        <div>{item.title}</div>
+                        <div>{item.duration} | {item.location}</div>
                     </Typography>
                 </div>
             </ExpansionPanelSummary>
+            {sessionDetails && sessionDetails.speakerData &&
             <ExpansionPanelDetails>
-                <Typography>
-                    <div>{item.title}</div>
-                    <div>{item.date}</div>
-                    <div>{item.duration}</div>
-                </Typography>
-            </ExpansionPanelDetails>
+                <div>
+                    <Typography>
+                        <img style={imgStyle} src={defaultProfileIcon}/>
+                        <div>{sessionDetails.speakerData.speakerName}</div>
+                        <div>{sessionDetails.speakerData.designation}</div> 
+                        <div>{sessionDetails.sessionDesc}</div>
+                        {sessionDetails.tagsInfo.map((item, index) => <span key={index}>{item}</span>)}
+                    </Typography>
+                </div>
+                <div onClick={this.handleOpen}>Show More</div>
+            </ExpansionPanelDetails>}
         </ExpansionPanel>
         )});
   }
 
+  handleOpen = () => {
+    this.setState({ showModal: true });
+  };
+
+  handleClose = () => {
+    this.setState({ showModal: false });
+  };
+
   render() {
-    const { scheduleData } = this.props;
-    console.log(scheduleData);
+    const { scheduleData, sessionDetails } = this.props;
+    console.log(sessionDetails);
     return (
       <Grid container spacing={16} justify="center">
         <Grid item xs={12}>
           {scheduleData && this.getScheduleTable(scheduleData)}
         </Grid>
+        <ShowMoreModal open={this.state.showModal} handleClose={this.handleClose}/>
       </Grid>
     );
   }
