@@ -13,7 +13,6 @@ class Filter extends Component {
 
     getFilterList = () =>{
         const {filterTags } = this.props;
-        alert(JSON.stringify(filterTags))
         return filterTags && filterTags.tagInfo.map((item,index) => {
             return <Fragment>
                         <ListItem key={index} button>
