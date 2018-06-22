@@ -17,27 +17,14 @@ class FetchSchedule extends React.Component{
         fetchScheduleInfo();
     }
 
-    componentWillReceiveProps(nextProps){
-        if(nextProps.scheduleData && nextProps.scheduleData !== this.props.scheduleData)
-        {
-            console.log(nextProps.scheduleData[0].session);
-        }
-    }
-
     render(){
-        return <Schedule />
+        return <Schedule scheduleData = {this.props.scheduleData && this.props.scheduleData[0] && this.props.scheduleData[0].session}/>
     }
 }
 
 const mapStateToProps = state => ({
     scheduleData: state.scheduleInfo.scheduleInfo
   });
-
-//   const mapDispatchToProps = dispatch => ({
-//     fetchScheduleInfo: () => {
-//       dispatch(fetchScheduleInfo());
-//     }
-//   });
 
 export default connect(
     mapStateToProps
