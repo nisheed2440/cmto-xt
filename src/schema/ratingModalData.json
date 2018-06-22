@@ -1,0 +1,18 @@
+{
+  "title": "popup title if any",
+  "ratingData":[{
+    "question": "How was the session",
+    "leastRatingTitle": "not likely",
+    "highRatingTitle": "extremely likely"
+  },
+  {
+    "question": "Is content relevant?",
+    "leastRatingTitle": "not likely",
+    "highRatingTitle": "extremely likely"
+  },
+  {
+    "question": "How was the presentation?",
+    "leastRatingTitle": "not likely",
+    "highRatingTitle": "extremely likely"
+  }]
+}

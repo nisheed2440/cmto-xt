@@ -1,0 +1,102 @@
+[
+  {
+    "session": [
+      {
+        "title": "Session 1",
+        "sessionID":"SS1",
+        "date": "14 Jun 2018",
+        "time": "10:30AM",
+        "duration": "30 mins",
+        "location": "Audi 01",
+        "rating": "3.5",
+        "tagsInfo": [
+            "AR",
+            "React"
+          ],
+        "favoriteStatus": false,
+		"sessionDesc" : "This is session 1 deails",
+        "speakerData": {
+          "profileImg": "speaker1.jpg",
+          "speakerDesc": "Few lines about speaker",
+          "designation": "Senior Director",
+          "socialData": [{
+            "name": "Facebook",
+            "iconName": "icon-facebook",
+            "socialLink": "www.facebook.com/Speaker"
+          },
+          {
+            "name": "Twitter",
+            "iconName": "icon-twitter",
+            "socialLink": "www.twitter.com/Speaker"
+          }],
+          "discussionData":[{}]
+          
+        }
+      },
+      {
+        "title": "Session 1",
+        "sessionID":"SS2",
+        "date": "14 Jun 2018",
+        "time": "11:00AM",
+        "duration": "30 mins",
+        "location": "Audi 01",
+        "rating": "4",
+        "tagsInfo": [
+            "AR",
+            "React"
+          ],
+        "favoriteStatus": false,
+		"sessionDesc" : "This is session 2 deails",
+        "speakerData": {
+          "profileImg": "speaker2.jpg",
+          "speakerDesc": "Few lines about speaker",
+          "designation": "Senior Director",
+          "socialData": [{
+            "name": "Facebook",
+            "iconName": "icon-facebook",
+            "socialLink": "www.facebook.com/Speaker"
+          },
+          {
+            "name": "Twitter",
+            "iconName": "icon-twitter",
+            "socialLink": "www.twitter.com/Speaker"
+          }],
+          "discussionData":[{}]
+          
+        }
+      },
+      {
+        "title": "Session 3",
+        "sessionID":"SS3",
+        "date": "14 Jun 2018",
+        "time": "11:30AM",
+        "duration": "30 mins",
+        "location": "Audi 01",
+        "rating": "4.5",
+        "tagsInfo": [
+            "AR",
+            "React"
+          ],
+        "favoriteStatus": false,
+		"sessionDesc" : "This is session 3 deails",
+        "speakerData": {
+          "profileImg": "speaker3.jpg",
+          "speakerDesc": "Few lines about speaker",
+          "designation": "Senior Director",
+          "socialData": [{
+            "name": "Facebook",
+            "iconName": "icon-facebook",
+            "socialLink": "www.facebook.com/Speaker"
+          },
+          {
+            "name": "Twitter",
+            "iconName": "icon-twitter",
+            "socialLink": "www.twitter.com/Speaker"
+          }],
+          "discussionData":[{}]
+          
+        }
+      }
+    ]
+  }
+]

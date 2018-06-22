@@ -1,0 +1,54 @@
+[
+  {
+    "session": [
+      {
+        "title": "Session 1",
+        "sessionID":"SS1",
+        "date": "14 Jun 2018",
+        "time": "10:30AM",
+        "duration": "30 mins",
+		"location": "Audi 01",
+        "emceeData": {
+          "thumbnailImg": "speaker1.jpg",
+          "tagInfo": [
+            "AR",
+            "React"
+          ],
+          "favStatus": false
+        }
+      },
+      {
+        "title": "Session 2",
+        "sessionID":"SS1",
+        "date": "14 Jun 2018",
+        "time": "11:00AM",
+        "duration": "30 mins",
+		"location": "Audi 01",
+        "emceeData": {
+          "thumbnailImg": "speaker2.jpg",
+          "tagInfo": [
+            "AR",
+            "React"
+          ],
+          "favStatus": false
+        }
+      },
+      {
+        "title": "Session 3",
+        "sessionID":"SS1",
+        "date": "14 Jun 2018",
+        "time": "11:30AM",
+        "duration": "30 mins",
+		"location": "Audi 01",
+        "emceeData": {
+          "thumbnailImg": "speaker3.jpg",
+          "tagInfo": [
+            "AR",
+            "React"
+          ],
+          "favStatus": true
+        }
+      }
+    ]
+  }
+]
