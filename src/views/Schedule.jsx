@@ -95,8 +95,8 @@ class Schedule extends Component {
                         {item.time.substring(0, timeIndex)} <span className={classes.ampm}>{item.time.slice(-2)}</span>
                     </Typography>
                     <Typography className={classes.title}>
-                        <div>{item.title}</div>
-                        <div>{item.duration} | {item.location}</div>
+                        <span>{item.title}</span><br/>
+                        <span>{item.duration} | {item.location}</span>
                     </Typography>
                 </div>
             </ExpansionPanelSummary>

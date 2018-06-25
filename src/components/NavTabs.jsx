@@ -35,7 +35,6 @@ class NavTabs extends Component {
           <MUITab label="Agenda" value="agenda" />
           <MUITab label="Schedule" value="schedule" />
           <MUITab label="Favorites" value="favourites" />
-          <MUITab label="My Pass" value="mypass" />
         </MUITabs>
       </div>
     );

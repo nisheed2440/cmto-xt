@@ -12,7 +12,6 @@ import WninLogo from "../assets/images/wnin_logo.png";
 import Agenda from "./Agenda";
 import FetchSchedule from "../components/FetchSchedule";
 import Favourites from "./Favourites";
-import LoadableMyPass from "../loadable/LoadableMyPass";
 
 const styles = theme => ({
   root: {
@@ -33,8 +32,7 @@ const styles = theme => ({
 const routeMapping = {
   schedule: <FetchSchedule />,
   favourites: <Favourites />,
-  agenda: <Agenda />,
-  mypass: <LoadableMyPass />
+  agenda: <Agenda />
 };
 
 class Homepage extends Component {
