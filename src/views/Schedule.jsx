@@ -55,9 +55,9 @@ const styles = theme => ({
   }
 });
 
-const imgStyle= {'width': '50px',
-    'border': '1px',
-   ' border-radius': '25px'}
+const imgStyle= {width: '50px',
+    border : '1px',
+    borderRadius: '25px'}
 
 class Schedule extends Component {
   state = {
@@ -104,10 +104,10 @@ class Schedule extends Component {
             <ExpansionPanelDetails>
                 <div>
                     <Typography>
-                        <img style={imgStyle} src={defaultProfileIcon}/>
-                        <div>{sessionDetails.speakerData.speakerName}</div>
-                        <div>{sessionDetails.speakerData.designation}</div> 
-                        <div>{sessionDetails.sessionDesc}</div>
+                        <img style={imgStyle} src={defaultProfileIcon}/><br/>
+                        <span >{sessionDetails.speakerData.speakerName}</span><br/>
+                        <span>{sessionDetails.speakerData.designation}</span><br/>
+                        <span>{sessionDetails.sessionDesc}</span><br/>
                         {sessionDetails.tagsInfo.map((item, index) => <span key={index}>{item}</span>)}
                     </Typography>
                 </div>
