@@ -10,7 +10,8 @@ import { actionUpdateTab } from "../store/actions";
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    background: '#FFFFFF'
   }
 };
 
@@ -21,7 +22,7 @@ class NavTabs extends Component {
     history.push(`/home/${value}`);
   };
   render() {
-    const { classes, width, tab } = this.props;
+    const { classes, tab } = this.props;
     return (
       <div className={classes.root}>
         <MUITabs
@@ -29,8 +30,7 @@ class NavTabs extends Component {
           onChange={this.handleChange}
           indicatorColor="secondary"
           textColor="secondary"
-          centered={width !== "xs"}
-          scrollable={width === "xs"}
+          centered={true}
         >
           <MUITab label="Agenda" value="agenda" />
           <MUITab label="Schedule" value="schedule" />

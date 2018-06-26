@@ -1,54 +1,35 @@
 [
   {
-    "session": [
+    "id": 47,
+    "title": "Awesome Session One",
+    "content":
+      "Ipsum fugiat ut magna consectetur consequat qui pariatur ex laborum ea occaecat commodo occaecat exercitation. Culpa tempor cillum deserunt ad aute labore aliqua. Elit sit deserunt velit aliqua elit dolor labore. Minim elit voluptate duis ullamco ad dolor id ut mollit consequat est mollit enim. Duis amet anim proident dolore veniam cupidatat cupidatat pariatur.",
+    "topics": [
+      { "id": 4, "label": "AI", "color": "#4768fd" },
+      { "id": 2, "label": "Automation", "color": "#ff6c00" },
+      { "id": 3, "label": "ML", "color": "#ff4081" }
+    ],
+    "speakers": [
       {
-        "title": "Session 1",
-        "sessionID":"SS1",
-        "date": "14 Jun 2018",
-        "time": "10:30AM",
-        "duration": "30 mins",
-		"location": "Audi 01",
-        "emceeData": {
-          "thumbnailImg": "speaker1.jpg",
-          "tagInfo": [
-            "AR",
-            "React"
-          ],
-          "favStatus": false
-        }
-      },
-      {
-        "title": "Session 2",
-        "sessionID":"SS1",
-        "date": "14 Jun 2018",
-        "time": "11:00AM",
-        "duration": "30 mins",
-		"location": "Audi 01",
-        "emceeData": {
-          "thumbnailImg": "speaker2.jpg",
-          "tagInfo": [
-            "AR",
-            "React"
-          ],
-          "favStatus": false
-        }
-      },
-      {
-        "title": "Session 3",
-        "sessionID":"SS1",
-        "date": "14 Jun 2018",
-        "time": "11:30AM",
-        "duration": "30 mins",
-		"location": "Audi 01",
-        "emceeData": {
-          "thumbnailImg": "speaker3.jpg",
-          "tagInfo": [
-            "AR",
-            "React"
-          ],
-          "favStatus": true
+        "id": 45,
+        "name": "Nisheed Jagadish",
+        "description":
+          "Ipsum fugiat ut magna consectetur consequat qui pariatur ex laborum ea occaecat commodo occaecat exercitation. Culpa tempor cillum deserunt ad aute labore aliqua. Elit sit deserunt velit aliqua elit dolor labore. Minim elit voluptate duis ullamco ad dolor id ut mollit consequat est mollit enim. Duis amet anim proident dolore veniam cupidatat cupidatat pariatur.",
+        "image":
+          "http://localhost/wordpress/wp-content/uploads/2018/05/cmtou2.png",
+        "social": {
+          "linkedin": "https://xt-techradar.com",
+          "facebook": "https://xt-techradar.com",
+          "twitter": "https://xt-techradar.com",
+          "github": "https://xt-techradar.com"
         }
       }
-    ]
+    ],
+    "meta": {
+      "order": "0",
+      "venue": "Main Hall (room one)",
+      "time": "08:00 AM",
+      "type": "session"
+    }
   }
 ]

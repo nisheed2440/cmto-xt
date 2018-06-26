@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import tab from "./tabReducer";
-import scheduleInfo from "./scheduleReducer";
-import filterTags from './filterReducer';
+import sessions from "./sessionReducer";
+import sidebar from './sidebarReducer';
 
 export default combineReducers({
   tab,
-  scheduleInfo,
-  filterTags
+  sessions,
+  sidebar
 });

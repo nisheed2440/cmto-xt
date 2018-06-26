@@ -1,162 +1,44 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-// import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
-import Typography from "@material-ui/core/Typography";
-import Icon from "@material-ui/core/Icon";
-
 import Grid from "@material-ui/core/Grid";
-import defaultProfileIcon from '../images/default_avatar.png';
-import ShowMoreModal from './ShowMoreModal';
-import Filter from './Filter';
-
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-
+import CircularProgress from "@material-ui/core/CircularProgress";
+import FilterHeader from "../components/FilterHeader";
+import ScheduleTile from "../components/ScheduleTile";
+import { connect } from "react-redux";
 
 const styles = theme => ({
-  ampm: {
-    fontSize: 16,
-    verticalAlign: "middle"
-  },
-  summary: {
-    width: "100%",
-    display: "flex",
-    alignItems: "center"
-  },
-  time: {
-    paddingRight: theme.spacing.unit * 3,
-    borderRight: "1px solid #e6e6e6"
-  },
-  title: {
-    flex: 1,
-    paddingLeft: theme.spacing.unit * 3
-  },
-  leftIcon: {
-    marginRight: theme.spacing.unit
-  },
-  rightIcon: {
-    marginLeft: theme.spacing.unit
-  },
-  iconSmall: {
-    fontSize: 20
-  },
-  disabled:{
-      opacity: '1 !important'
-  },
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
+  spinner: {
+    margin: theme.spacing.unit * 2
   }
 });
 
-const imgStyle= {width: '50px',
-    border : '1px',
-    borderRadius: '25px'}
-
 class Schedule extends Component {
-  state = {
-    expanded: null,
-    showModal: false,
-    filter : false
-  };
-
-  handleChange = panel => (event, expanded) => {
-    this.props.getSessionDetails();
-    this.setState({
-      expanded: expanded ? panel : false
+  createSessionList = sessions => {
+    return sessions.map(session => {
+      return <ScheduleTile key={session.id} title={session.title} venue={session.meta.venue} tags={session.topics}/>
     });
   };
-
-  sideList = () => {
+  showSpinner = () => {
     const { classes } = this.props;
-    return <div className={classes.list}>
-      <List>
-        <Filter {...this.props}/>
-      </List>
-    </div>
-  }
-
-  getScheduleTable(scheduleData) {
-    const { expanded } = this.state;
-    const { classes, sessionDetails } = this.props;
-    return scheduleData.map((item, index) => {
-        let timeIndex = item.time.indexOf('AM' || 'PM');
-        return (
-        <ExpansionPanel key = {index}expanded={expanded === "panel"+index} onChange={this.handleChange("panel"+index)}>
-            <ExpansionPanelSummary expandIcon={<Icon>expand_more</Icon>}>
-                <div className={classes.summary}>
-                    <Typography variant="display1" className={classes.time}>
-                        {item.time.substring(0, timeIndex)} <span className={classes.ampm}>{item.time.slice(-2)}</span>
-                    </Typography>
-                    <Typography className={classes.title}>
-                        <span>{item.title}</span><br/>
-                        <span>{item.duration} | {item.location}</span>
-                    </Typography>
-                </div>
-            </ExpansionPanelSummary>
-            {sessionDetails && sessionDetails.speakerData &&
-            <ExpansionPanelDetails>
-                <div>
-                    <Typography>
-                        <img style={imgStyle} src={defaultProfileIcon}/><br/>
-                        <span >{sessionDetails.speakerData.speakerName}</span><br/>
-                        <span>{sessionDetails.speakerData.designation}</span><br/>
-                        <span>{sessionDetails.sessionDesc}</span><br/>
-                        {sessionDetails.tagsInfo.map((item, index) => <span key={index}>{item}</span>)}
-                    </Typography>
-                </div>
-                <div onClick={this.handleOpen}>Show More</div>
-            </ExpansionPanelDetails>}
-        </ExpansionPanel>
-        )});
-  }
-
-  handleOpen = () => {
-    this.setState({ showModal: true });
+    return (
+      <Grid container spacing={0} justify="center">
+        <CircularProgress className={classes.spinner} />
+      </Grid>
+    );
   };
-
-  handleClose = () => {
-    this.setState({ showModal: false });
-  }
-  
-  toggleDrawer = (open) => () => {
-    this.setState({
-      filter : open,
-    });
-  };
-
   render() {
-    const { scheduleData, sessionDetails, filterTags } = this.props;
-    console.log(filterTags);
-    console.log(sessionDetails);
+    const { sessions, filters } = this.props;
     return (
       <Fragment>
-        <div className="schedule-bar">Today's Schedule
-          <button onClick={this.toggleDrawer(true)}>Filter</button>
-        </div>
+        <FilterHeader disabled={!filters.length} setCount={3} />
         <Grid container spacing={16} justify="center">
           <Grid item xs={12}>
-            {scheduleData && this.getScheduleTable(scheduleData)}
+            {sessions.length
+              ? this.createSessionList(sessions)
+              : this.showSpinner()}
           </Grid>
-        <ShowMoreModal open={this.state.showModal} handleClose={this.handleClose}/>
-      </Grid>
-        <Drawer anchor="right" open={this.state.filter} onClose={this.toggleDrawer(false)}>
-          <div
-            tabIndex={0}
-            role="button"
-            onClick={this.toggleDrawer(false)}
-            onKeyDown={this.toggleDrawer(false)}
-          >
-          <button onClick={this.toggleDrawer(false)}>Close</button>
-            {this.sideList()}
-          </div>
-        </Drawer>
+        </Grid>
       </Fragment>
     );
   }
@@ -164,7 +46,17 @@ class Schedule extends Component {
 
 Schedule.propTypes = {
   classes: PropTypes.object.isRequired,
-  scheduleData: PropTypes.array
+  sessions: PropTypes.array.isRequired
 };
 
-export default withStyles(styles)(Schedule);
+const mapStateToProps = state => ({
+  sessions: state.sessions.data,
+  filters: state.sessions.filters
+});
+
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Schedule));

@@ -1,12 +1,8 @@
-  {
-		"title": "My filters",
-		"tagInfo": [
-			"Data Mining",
-			"Artificial Intelligence",
-			"Front end optimization",
-			"Internet of things",
-			"React",
-			"Node Applications",
-			"Deep learning"
-		]
-  }
+[
+  { "id": 4, "label": "AI", "color": "#4768fd" },
+  { "id": 2, "label": "Automation", "color": "#ff6c00" },
+  { "id": 7, "label": "DevOps", "color": false },
+  { "id": 5, "label": "IoT", "color": false },
+  { "id": 3, "label": "ML", "color": "#ff4081" },
+  { "id": 6, "label": "Optimization", "color": false }
+]
