@@ -1,0 +1,50 @@
+.wnin-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00baff+0,84d930+50,ff4200+100 */
+  background: #00baff; /* Old browsers */
+  background: -moz-linear-gradient(
+    -45deg,
+    #00baff 0%,
+    #84d930 50%,
+    #ff4200 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    -45deg,
+    #00baff 0%,
+    #84d930 50%,
+    #ff4200 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    135deg,
+    #00baff 0%,
+    #84d930 50%,
+    #ff4200 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00baff', endColorstr='#ff4200',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  &-logo-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  &-logo {
+    height: 100px;
+    width: 215px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    @media screen and (min-width: 768px) {
+      height: 200px;
+      width: 430px;
+    }
+  }
+}

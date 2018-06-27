@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import FilterHeader from "../components/FilterHeader";
-import ScheduleTile from "../components/ScheduleTile";
+import TimelineCard from '../components/TimelineCard/TimelineCard';
 import { connect } from "react-redux";
-
+import { actionUpdateTab } from "../store/actions";
 const styles = theme => ({
   spinner: {
     margin: theme.spacing.unit * 2
@@ -14,10 +13,35 @@ const styles = theme => ({
 });
 
 class Schedule extends Component {
+  state = {
+    expanded: false
+  }
+  componentWillMount() {
+    const { updateTab } = this.props;
+    updateTab("agenda");
+  }
   createSessionList = sessions => {
-    return sessions.map(session => {
-      return <ScheduleTile key={session.id} title={session.title} venue={session.meta.venue} tags={session.topics}/>
-    });
+    return (
+      <div className="timeline">
+        <header className="timeline-header">
+          <span className="tag is-medium is-primary">Start</span>
+        </header>
+        {sessions.map(session => {
+          return (
+            <div key={session.id} className="timeline-item is-primary">
+              <div className="timeline-marker" />
+              <div className="timeline-content">
+                <p className="heading">{session.meta.time}</p>
+                <TimelineCard key={session.id} session={session}/>
+              </div>
+            </div>
+          );
+        })}
+        <header className="timeline-header">
+          <span className="tag is-medium is-primary">End</span>
+        </header>
+      </div>
+    );
   };
   showSpinner = () => {
     const { classes } = this.props;
@@ -29,16 +53,12 @@ class Schedule extends Component {
   };
   render() {
     const { sessions, filters } = this.props;
+    console.log(filters);
     return (
       <Fragment>
-        <FilterHeader disabled={!filters.length} setCount={3} />
-        <Grid container spacing={16} justify="center">
-          <Grid item xs={12}>
-            {sessions.length
-              ? this.createSessionList(sessions)
-              : this.showSpinner()}
-          </Grid>
-        </Grid>
+        {sessions.length
+          ? this.createSessionList(sessions)
+          : this.showSpinner()}
       </Fragment>
     );
   }
@@ -46,7 +66,8 @@ class Schedule extends Component {
 
 Schedule.propTypes = {
   classes: PropTypes.object.isRequired,
-  sessions: PropTypes.array.isRequired
+  sessions: PropTypes.array.isRequired,
+  updateTab: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -54,7 +75,11 @@ const mapStateToProps = state => ({
   filters: state.sessions.filters
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  updateTab: data => {
+    dispatch(actionUpdateTab(data));
+  }
+});
 
 export default connect(
   mapStateToProps,

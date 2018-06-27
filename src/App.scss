@@ -1,1 +1,58 @@
-@import "./views/Schedule.scss"
+// 1. Import the initial variables
+@import "../node_modules/bulma/sass/utilities/initial-variables";
+@import "../node_modules/bulma/sass/utilities/functions";
+
+// 2. Set your own initial variables
+// Check the documentation @ https://bulma.io/documentation/overview/customize/
+
+// 3. Set the derived variables
+// Check the documentation @ https://bulma.io/documentation/overview/customize/
+
+// 4. Setup your Custom Colors
+// Check the documentation @ https://bulma.io/documentation/overview/customize/
+
+// 5. Add new color variables to the color map.
+@import "../node_modules/bulma/sass/utilities/derived-variables";
+// Check the documentation @ https://bulma.io/documentation/overview/customize/
+
+// 6. Import the rest of Bulma
+@import "../node_modules/bulma/sass/utilities/_all";
+@import "../node_modules/bulma/sass/base/_all";
+@import "../node_modules/bulma/sass/layout/_all";
+@import "../node_modules/bulma/sass/grid/columns";
+@import "../node_modules/bulma/sass/elements/container";
+@import "../node_modules/bulma/sass/elements/tag";
+@import "../node_modules/bulma-timeline/dist/css/bulma-timeline";
+
+html,
+body {
+  min-height: 100%;
+}
+
+.timeline {
+  @media screen and (min-width: 769px) {
+    padding-left: 10%;
+  }
+}
+.timeline-item {
+  position: relative;
+}
+.timeline-content {
+  width: 100%;
+
+  .heading {
+    display: block;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+   
+
+    @media screen and (min-width: 769px) {
+      font-size: 16px;
+      top: 14px;
+      left: -100px;
+      position: absolute;
+    }
+  }
+}

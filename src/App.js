@@ -7,7 +7,7 @@ import {
   Redirect,
   Switch
 } from "react-router-dom";
-import LoadableHomepage from "./loadable/LoadableHomepage";
+import { LoadableHomepage } from "./loadable";
 import theme from "./utils/theme";
 import store from "./store";
 import { Provider } from "react-redux";
