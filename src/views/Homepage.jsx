@@ -11,7 +11,6 @@ import HeroBanner from "../components/HeroBanner";
 import BannerImage from "../assets/images/bg8.jpg";
 import WninLogo from "../assets/images/wnin_logo.png";
 import Agenda from "./Agenda";
-import Schedule from "./Schedule";
 import FilterSidebar from "../components/FilterSidebar";
 import Favourites from "./Favourites";
 import { connect } from "react-redux";
@@ -35,7 +34,6 @@ const styles = theme => ({
 });
 
 const routeMapping = {
-  schedule: <Schedule />,
   favourites: <Favourites />,
   agenda: <Agenda />
 };

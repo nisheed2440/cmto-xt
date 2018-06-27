@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Icon from "@material-ui/core/Icon";
 import Drawer from "@material-ui/core/Drawer";
+import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
 import { actionToggleSidebar } from "../store/actions";
 import { connect } from "react-redux";
@@ -15,8 +16,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Switch from "@material-ui/core/Switch";
+import Checkbox from "@material-ui/core/Checkbox";
 import SessionTag from "./SessionTag";
+import {
+  actionUpdateScheduleInfo,
+  actionUpdateFilterTags
+} from "../store/actions";
 
 const styles = theme => ({
   root: {
@@ -46,8 +51,35 @@ class FilterSidebar extends Component {
     toggleSidebar(!sidebarOpen);
   };
 
+  filterClick = (event) => {
+    // console.log(labelVal);
+    let targetElem = event.target;
+    let label = targetElem.value;
+    let filterData = [];
+    const { updateData } = this.props;
+    Promise.resolve(this.fetchSessions()).then(modules => {
+      modules.data.forEach((data, index) => {
+        if( data.topics.length ) {
+          let topicData = data.topics;
+          topicData.forEach((topic, i) => {
+            if( topic.label === label) {
+              filterData.push(data);
+            }
+          });
+        }
+      }); 
+      updateData(filterData);
+    });
+  };
+
+  fetchSessions = () => {
+    return axios.get("http://localhost/wordpress/wp-json/cmto/v1/sessions").catch(err => {
+      console.log(err);
+    });
+  };
+
   render() {
-    const { classes, sidebarOpen, filters } = this.props;
+    const { classes, sidebarOpen, filters, updateData } = this.props;
     return (
       <Drawer anchor={"right"} open={sidebarOpen} onClose={this.closeSidebar}>
         <Grid container className={classes.root}>
@@ -87,7 +119,11 @@ class FilterSidebar extends Component {
                 >
                   <ListItemText primary={<SessionTag key={filter.id} label={filter.label} color={filter.color || ''}/>} />
                   <ListItemSecondaryAction>
-                    <Switch/>
+                  <Checkbox
+                    onClick={this.filterClick}
+                    value={filter.label}
+                    color='primary'
+                  />
                   </ListItemSecondaryAction>
                 </ListItem>
               ))}
@@ -114,7 +150,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   toggleSidebar: isOpen => {
     dispatch(actionToggleSidebar(isOpen));
-  }
+  },
+  updateData: data => {
+    dispatch(actionUpdateScheduleInfo(data));
+  },
 });
 
 export default connect(

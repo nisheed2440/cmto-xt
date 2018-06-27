@@ -33,7 +33,6 @@ class NavTabs extends Component {
           centered={true}
         >
           <MUITab label="Agenda" value="agenda" />
-          <MUITab label="Schedule" value="schedule" />
           <MUITab label="Favorites" value="favourites" />
         </MUITabs>
       </div>

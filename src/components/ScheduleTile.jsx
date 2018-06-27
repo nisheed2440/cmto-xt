@@ -49,13 +49,24 @@ const styles = theme => ({
 
 class ScheduleTile extends Component {
   render() {
-    const { classes, width, favClick, tags, title, venue } = this.props;
+    const { classes, width, favClick, showModal, tags, id, type, title, venue } = this.props;
+    let favIcon;
+    if( type === 'session') {
+      favIcon = (<IconButton
+      className={classes.favButton}
+      aria-label="Favourite"
+      onClick={() =>favClick({id})}
+    >
+      <Icon>star</Icon>
+    </IconButton> );
+
+    }
     return (
       <Card className={classes.root} elevation={1}>
         <CardContent className={classes.cardContent}>
           <div className={classes.timeSection} />
           <div className={classes.detailSection}>
-            <ButtonBase className={classes.ripple} onClick={() => (console.log('Clicked'))}>
+            <ButtonBase className={classes.ripple} onClick={showModal}>
               <Typography variant="title" gutterBottom noWrap>
                 {title}
               </Typography>
@@ -79,13 +90,7 @@ class ScheduleTile extends Component {
               </div>
             </ButtonBase>
           </div>
-          <IconButton
-            className={classes.favButton}
-            aria-label="Favourite"
-            onClick={favClick}
-          >
-            <Icon>star</Icon>
-          </IconButton>
+           {favIcon}
         </CardContent>
       </Card>
     );
@@ -97,12 +102,32 @@ ScheduleTile.propTypes = {
   width: PropTypes.string.isRequired,
   venue: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   favClick: PropTypes.func,
-  tags: PropTypes.array
+  showModal: PropTypes.func,
+  favSessionData: PropTypes.array
 };
 
 ScheduleTile.defaultProps = {
-  favClick: () => {},
+  favClick: (idVal) => {
+    let favSessionData = localStorage.getItem("favSessions") ? JSON.parse(localStorage.getItem("favSessions")) : [];
+    if ( !favSessionData.length ) {
+      favSessionData.push(idVal);
+      localStorage.setItem("favSessions", JSON.stringify(favSessionData));
+    }
+    else {
+      favSessionData.forEach((favData, index) => {
+        if( favData.id && favData.id !== idVal.id ) {
+          favSessionData.push(idVal);
+          localStorage.setItem("favSessions", JSON.stringify(favSessionData));
+        }
+      }); 
+    }
+  },
+  showModal: () => {
+
+  },
   tags: []
 };
 
