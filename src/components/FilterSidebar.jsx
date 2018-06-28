@@ -26,6 +26,7 @@ import {
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    height: '100%',
     width: 250,
     backgroundColor: '#FFF'
   },
@@ -100,7 +101,7 @@ class FilterSidebar extends Component {
                   Filter
                 </Typography>
                 <Typography variant="caption" color="inherit">
-                  (12 RESULTS)
+                  
                 </Typography>
               </Toolbar>
             </AppBar>
