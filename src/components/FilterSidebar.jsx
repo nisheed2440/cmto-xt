@@ -19,8 +19,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Checkbox from "@material-ui/core/Checkbox";
 import SessionTag from "./SessionTag";
 import {
-  actionUpdateScheduleInfo,
-  actionUpdateFilterTags
+  actionUpdateScheduleInfo
 } from "../store/actions";
 
 const styles = theme => ({
@@ -46,7 +45,7 @@ const styles = theme => ({
 });
 
 class FilterSidebar extends Component {
-  
+
   closeSidebar = () => {
     const { toggleSidebar, sidebarOpen } = this.props;
     toggleSidebar(!sidebarOpen);
@@ -57,20 +56,36 @@ class FilterSidebar extends Component {
     let targetElem = event.target;
     let label = targetElem.value;
     let filterData = [];
+    let selectedFilters = [];
     const { updateData } = this.props;
     Promise.resolve(this.fetchSessions()).then(modules => {
-      modules.data.forEach((data, index) => {
+      modules.data.map(data => {
         if( data.topics.length ) {
           let topicData = data.topics;
-          topicData.forEach((topic, i) => {
+          topicData.map(topic => {
             if( topic.label === label) {
               filterData.push(data);
             }
           });
         }
       }); 
+      selectedFilters.push(label);
+      localStorage.setItem("selectedFilters", JSON.stringify(selectedFilters));
       updateData(filterData);
     });
+  };
+
+  setCheckboxState = (event) => {
+    let checkboxSelected = localStorage.getItem('selectedFilters') ? JSON.parse(localStorage.getItem('selectedFilters')) : [];
+    if( checkboxSelected.length ) {
+      console.log(event);
+      if( checkboxSelected.indexOf(event.target.value) > -1 ) {
+        return true;
+      }
+    }
+    else {
+      return false;
+    }
   };
 
   fetchSessions = () => {
@@ -80,7 +95,7 @@ class FilterSidebar extends Component {
   };
 
   render() {
-    const { classes, sidebarOpen, filters, updateData } = this.props;
+    const { classes, sidebarOpen, filters } = this.props;
     return (
       <Drawer anchor={"right"} open={sidebarOpen} onClose={this.closeSidebar}>
         <Grid container className={classes.root}>
@@ -121,7 +136,7 @@ class FilterSidebar extends Component {
                   <ListItemText primary={<SessionTag key={filter.id} label={filter.label} color={filter.color || ''}/>} />
                   <ListItemSecondaryAction>
                   <Checkbox
-                    onClick={this.filterClick}
+                    onChange={this.filterClick}
                     value={filter.label}
                     color='primary'
                   />

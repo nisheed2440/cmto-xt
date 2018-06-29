@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from "@material-ui/core/styles";
+import SocialShare from "./SocialShare";
 
 const styles = theme => ({
-
+    root: {
+        height: 'auto'
+    }
 });
 
 class ShowMore extends Component {
     render() {
         return(
-            <div/>
-        )
+            <SocialShare/>
+        );
     } 
 }
 
